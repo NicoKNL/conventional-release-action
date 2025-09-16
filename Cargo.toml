@@ -1,6 +1,6 @@
 [package]
 name = "conventional-release-action"
-version = "0.0.0+dev"
+version = "1.0.0"
 edition = "2021"
 description = "A flexible, config-driven release flow that scales from a single package to large monorepos"
 license = "MIT"

@@ -1,0 +1,24 @@
+name: "Conventional Release Action"
+description: "A flexible, config-driven release flow that scales from a single package to large monorepos"
+author: "NicoKNL"
+
+inputs:
+  github-token:
+    description: "GitHub token for authentication"
+    required: true
+  config-file:
+    description: "Path to the configuration file"
+    required: false
+    default: ".release-config.toml"
+  dry-run:
+    description: "Run in dry-run mode without creating releases"
+    required: false
+    default: "false"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    GITHUB_TOKEN: ${{ inputs.github-token }}
+    CONFIG_FILE: ${{ inputs.config-file }}
+    DRY_RUN: ${{ inputs.dry-run }}

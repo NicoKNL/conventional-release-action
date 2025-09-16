@@ -1,0 +1,14 @@
+[version]
+initial_version = "0.0.0"
+
+tag_prefix = "v"
+tag_suffix = ""
+
+[[version.files]]
+path = "Cargo.toml"
+marker = "0.0.0+dev"
+
+[[version.files]]
+path = "action.yaml"
+marker = "Dockerfile"
+template = "docker://ghcr.io/nicoknl/conventional-release-action:{version}"

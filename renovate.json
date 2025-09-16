@@ -1,0 +1,63 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits"],
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "rebaseWhen": "conflicted",
+  "cargo": {
+    "lockFileMaintenance": {
+      "enabled": true
+    }
+  },
+
+  "packageRules": [
+    {
+      "description": "Dockerfile: production images - do NOT automerge",
+      "matchManagers": ["dockerfile"],
+      "matchDatasources": ["docker"],
+      "semanticCommitType": "build",
+      "semanticCommitScope": "image",
+      "prPriority": 10,
+      "automerge": false
+    },
+    {
+      "description": "GitHub Actions: auto-merge non-major updates only",
+      "matchManagers": ["github-actions"],
+      "extends": [":semanticCommitTypeAll(chore)", ":semanticCommitScope(ci)"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "lockFileMaintenance"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "Cargo: Rust dependencies - patch/pin updates",
+      "matchManagers": ["cargo"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps",
+      "matchUpdateTypes": ["patch", "pin", "lockFileMaintenance"],
+      "automerge": true,
+      "prPriority": 5
+    },
+    {
+      "description": "Cargo: Rust dependencies - minor updates",
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps",
+      "automerge": true,
+      "prPriority": 3
+    },
+    {
+      "description": "Cargo: Rust dependencies - major updates (manual review)",
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["major"],
+      "semanticCommitType": "feat",
+      "semanticCommitScope": "deps",
+      "automerge": false,
+      "prPriority": 15
+    }
+  ]
+}

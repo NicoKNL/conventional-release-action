@@ -28,7 +28,7 @@ COPY src ./src
 RUN cargo build --release
 
 # CA certificates stage
-FROM --platform=linux/amd64 alpine:3.22.1 AS certs
+FROM --platform=linux/amd64 alpine:3.23.2 AS certs
 RUN apk --no-cache add ca-certificates
 
 # Runtime stage - minimal distroless image with specific version

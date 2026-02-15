@@ -1,5 +1,5 @@
 # Build stage
-FROM --platform=linux/amd64 debian:12-slim AS builder
+FROM --platform=linux/amd64 debian:13-slim AS builder
 
 WORKDIR /app
 
